@@ -10,7 +10,8 @@
     "pretest": "npm run typecheck && npm run lint",
     "test": "jest",
     "test:watch": "jest --watch",
-    "typecheck": "tsc --noEmit --project tsconfig.json"
+    "typecheck": "tsc --noEmit --project tsconfig.json",
+    "serve-examples": "vite ./examples --debug"
   },
   "author": "Marc Jansen <jansen@terrestris.de>",
   "license": "BSD-2-Clause",
@@ -26,7 +27,8 @@
     "jest-environment-jsdom": "^29.6.4",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vite": "^4.4.5"
   },
   "peerDependencies": {
     "ol": "^8.0.0"
