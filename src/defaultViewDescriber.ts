@@ -2,7 +2,7 @@ import { View } from 'ol';
 import {
   ViewDescriberFunc
 } from './types';
-import { METERS_PER_UNIT } from 'ol/proj';
+import { METERS_PER_UNIT, Projection, get, transform } from 'ol/proj';
 import { Units } from 'ol/proj/Units';
 
 const calculateScale = (view: View): number => {
@@ -18,6 +18,23 @@ const calculateScale = (view: View): number => {
 };
 
 
+const get4326Coordinates = (bbox: number[], center: number[], proj: Projection) => {
+  const epsg4326 = get('EPSG:4326');
+  if (epsg4326 === null || proj.getCode() === epsg4326?.getCode()) {
+    return {
+      bbox,
+      center
+    };
+  }
+  let ll = [bbox[0], bbox[1]];
+  let ur = [bbox[2], bbox[3]];
+  return {
+    bbox: [...transform(ll, proj, epsg4326), ...transform(ur, proj, epsg4326)],
+    center: transform(center, proj, epsg4326)
+  };
+};
+
+
 /**
  * A basic view describer.
  *
@@ -25,13 +42,18 @@ const calculateScale = (view: View): number => {
  * @returns ViewDescription A description of the view.
  */
 export const defaultViewDescriber: ViewDescriberFunc = async (view: View) => {
+  const bbox = view.calculateExtent() as number[];
+  const center = view.getCenter() as number[];
+  const proj = view.getProjection();
+  const epsg4326 = get4326Coordinates(bbox, center, proj);
   let viewDesc = {
-    bbox: view.calculateExtent() as number[],
-    center: view.getCenter() as number[],
-    projection: view.getProjection().getCode(),
+    bbox,
+    center,
+    projection: proj.getCode(),
     rotation: view.getRotation(),
     zoom: view.getZoom(),
-    scale: calculateScale(view)
+    scale: calculateScale(view),
+    epsg4326
   };
   return viewDesc;
 };

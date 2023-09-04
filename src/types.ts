@@ -8,6 +8,10 @@ export type ViewDescription = {
   rotation?: number;
   scale?: number;
   zoom?: number;
+  epsg4326?: {
+    bbox?: number[];
+    center?: number[];
+  };
 };
 
 export type LayerDescription = {

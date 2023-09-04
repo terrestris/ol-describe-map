@@ -12,5 +12,6 @@ The library ships with the most basic functionality to describe maps, which most
 
 # TODOs
 
-* OGC 
+* handle useGeographic!
+* OGC!
 
