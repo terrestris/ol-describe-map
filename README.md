@@ -25,8 +25,14 @@ npm run test:watch
 npm run serve-examples
 # examples are now e.g. http://localhost:5173/basic/index.html
 
-# build
+# build (library only)
 npm run build
+
+# build (examples only, rarely used)
+npm run build-examples
+
+# build (examples and library)
+npm run build:all
 # check the contents of the dist-folder
 
 # cleanup build or coverage artifacts
