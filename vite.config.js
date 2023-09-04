@@ -10,5 +10,6 @@ export default defineConfig({
         nominatim: resolve(__dirname, 'examples/nominatim/index.html')
       }
     }
-  }
+  },
+  base: './'
 });
