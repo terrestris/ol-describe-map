@@ -2,16 +2,18 @@
   "name": "ol-describe-map",
   "version": "0.0.1",
   "description": "Get a configurable textual description of an OpenLayers map, to e.g. enhance accessibility",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "scripts": {
     "clean": "rimraf ./dist ./coverage",
     "build": "tsc",
+    "build-examples": "vite build --config vite.config.js",
+    "build:all": "npm run build-examples && npm run build",
     "lint": "eslint -c .eslintrc.js --ext ts src/",
     "pretest": "npm run typecheck && npm run lint",
+    "serve-examples": "vite ./examples",
     "test": "jest",
     "test:watch": "jest --watch",
-    "typecheck": "tsc --noEmit --project tsconfig.json",
-    "serve-examples": "vite ./examples --debug"
+    "typecheck": "tsc --noEmit --project tsconfig.json"
   },
   "author": "Marc Jansen <jansen@terrestris.de>",
   "license": "BSD-2-Clause",
