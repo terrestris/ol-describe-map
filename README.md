@@ -9,6 +9,15 @@ This description could enhance OpenLayers map applications by
 
 The library ships with the most basic functionality to describe maps, which most applications will most likely adjust to their specific purpose. It is easy to configure more specific describers that take care of the specialties of your actual application.
 
+# Examples
+
+* [basic usage, main branch](https://terrestris.github.io/ol-describe-map/main/examples/basic/index.html)
+* [Nominatim describer, main branch](https://terrestris.github.io/ol-describe-map/main/examples/nominatim/index.html)
+
+# API
+
+[Typedoc](https://terrestris.github.io/ol-describe-map/main/doc/index.html)
+
 # Development
 
 ```bash
