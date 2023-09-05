@@ -50,12 +50,12 @@ But applications might have more specific ways of describing the map content, an
 easily pass your own describer:
 
 ```javascript
-// instead of the folowing line from the above axample…
+// instead of the following line from the above example…
 let desc = await describe(map);
 ```
 
 ```javascript
-// … you can create …
+// …you can create…
 const myDescriber = async () => {
   return 'HumptyDumpty';
 };
@@ -68,12 +68,15 @@ layers that were described.
 
 # Examples
 
-* [basic usage, main branch](https://terrestris.github.io/ol-describe-map/main/examples/basic/index.html)
-* [Nominatim describer, main branch](https://terrestris.github.io/ol-describe-map/main/examples/nominatim/index.html)
+These examples are all based on the `main`-branch:
+
+* [Basic usage](https://terrestris.github.io/ol-describe-map/main/examples/basic/index.html)
+* [Nominatim describer](https://terrestris.github.io/ol-describe-map/main/examples/nominatim/index.html)
+* [It's OK to `useGeographic()`](https://terrestris.github.io/ol-describe-map/main/examples/nominatim/index.html)
 
 # API
 
-[Typedoc](https://terrestris.github.io/ol-describe-map/main/doc/index.html)
+[Typedoc for all exported types and functions](https://terrestris.github.io/ol-describe-map/main/doc/index.html) again for the `main`-branch
 
 # Development
 
