@@ -1,8 +1,11 @@
 {
-  "name": "ol-describe-map",
+  "name": "@terrestris/ol-describe-map",
   "version": "0.0.1",
   "description": "Get a configurable textual description of an OpenLayers map, to e.g. enhance accessibility",
   "main": "dist/src/index.js",
+  "files": [
+    "dist/src"
+  ],
   "scripts": {
     "clean": "rimraf ./dist ./coverage",
     "build": "tsc",
