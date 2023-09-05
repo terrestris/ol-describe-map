@@ -80,16 +80,20 @@ var get4326Coordinates = function (bbox, center, proj) {
  * @returns ViewDescription A description of the view.
  */
 var defaultViewDescriber = function (view) { return __awaiter(void 0, void 0, void 0, function () {
-    var bbox, center, proj, epsg4326, viewDesc;
+    var bbox, center, viewProjection, userProjection, epsg4326, viewDesc;
     return __generator(this, function (_a) {
         bbox = view.calculateExtent();
         center = view.getCenter();
-        proj = view.getProjection();
-        epsg4326 = get4326Coordinates(bbox, center, proj);
+        viewProjection = view.getProjection();
+        userProjection = (0, proj_1.getUserProjection)();
+        if (userProjection && userProjection.getCode() !== viewProjection.getCode()) {
+            viewProjection = userProjection;
+        }
+        epsg4326 = get4326Coordinates(bbox, center, viewProjection);
         viewDesc = {
             bbox: bbox,
             center: center,
-            projection: proj.getCode(),
+            projection: viewProjection.getCode(),
             rotation: view.getRotation(),
             zoom: view.getZoom(),
             scale: calculateScale(view),
