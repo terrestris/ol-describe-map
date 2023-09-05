@@ -108,7 +108,6 @@ npm run clean
 
 # TODOs
 
-* handle useGeographic!
 * OGC!
 * improve vectorlayer description / statistics etc
 
