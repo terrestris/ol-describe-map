@@ -2,10 +2,49 @@
   "name": "@terrestris/ol-describe-map",
   "version": "0.0.1",
   "description": "Get a configurable textual description of an OpenLayers map, to e.g. enhance accessibility",
+  "keywords": [
+    "openlayers",
+    "ol",
+    "accessibility",
+    "semantic",
+    "geo",
+    "mapping",
+    "cartography"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/terrestris/ol-describe-map.git"
+  },
+  "homepage": "https://terrestris.github.io/ol-describe-map",
+  "bugs": "https://github.com/terrestris/ol-describe-map/issues",
   "main": "dist/src/index.js",
   "files": [
     "dist/src"
   ],
+  "author": "terrestris GmbH & Co. KG <info@terrestris.de>",
+  "contributors": [
+    {
+      "name": "Marc Jansen",
+      "email": "jansen@terrestris.de",
+      "url": "https://github.com/marcjansen"
+    },
+    {
+      "name": "Fritz Höing",
+      "email": "hoeing@terrestris.de",
+      "url": "https://github.com/FritzHoing"
+    },
+    {
+      "name": "Jan Suleiman",
+      "email": "suleiman@terrestris.de",
+      "url": "https://github.com/jansule"
+    },
+    {
+      "name": "Daniel Koch",
+      "email": "koch@terrestris.de",
+      "url": "https://github.com/dnlkoch"
+    }
+  ],
+  "license": "BSD-2-Clause",
   "scripts": {
     "clean": "rimraf ./dist ./coverage",
     "build": "tsc",
@@ -19,8 +58,6 @@
     "test:watch": "jest --watch",
     "typecheck": "tsc --noEmit --project tsconfig.json"
   },
-  "author": "Marc Jansen <jansen@terrestris.de>",
-  "license": "BSD-2-Clause",
   "devDependencies": {
     "@babel/core": "^7.22.15",
     "@babel/preset-env": "^7.22.15",
@@ -40,5 +77,8 @@
   },
   "peerDependencies": {
     "ol": "^8.0.0"
+  },
+  "engines": {
+    "node": ">= 18"
   }
 }
