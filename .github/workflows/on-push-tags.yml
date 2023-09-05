@@ -1,0 +1,28 @@
+name: Build and publish artefacts to GitHub Pages for tag
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: npm run build:all
+      # Popular action to deploy to GitHub Pages:
+      # Docs: https://github.com/peaceiris/actions-gh-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.ref_type  == 'tag' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # publish from dist folder…
+          publish_dir: ./dist
+          # …to a folder named like the tag
+          destination_dir: ${{ github.ref_name }}
