@@ -53,6 +53,7 @@
     "build:all": "npm run build-examples && npm run build-docs && npm run build",
     "lint": "eslint -c .eslintrc.js --ext ts src/",
     "pretest": "npm run typecheck && npm run lint",
+    "release": "npm run clean && npm run build:all && release-it",
     "serve-examples": "vite ./examples",
     "test": "jest",
     "test:watch": "jest --watch",
