@@ -4,11 +4,12 @@ exports.rad2deg = exports.formatBBOX = exports.formatCoordinate = exports.roundT
 var SPECIAL_NUMS = ['zeroth', 'first', 'second',
     'third', 'fourth', 'fifth', 'sixth', 'seventh',
     'eighth', 'ninth', 'tenth', 'eleventh', 'twelfth',
-    'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth', 'seventeenth', 'eighteenth', 'nineteenth'];
+    'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth',
+    'seventeenth', 'eighteenth', 'nineteenth'];
 var DECA = ['twent', 'thirt', 'fort', 'fift', 'sixt', 'sevent', 'eight', 'ninet'];
 /**
  * Turns a number into a stringified version, i.e. 1 becomes 'first', 22 becomes
- * 'twenty-second'. numbers above 100 are returnes as '# 175'.
+ * 'twenty-second'. numbers above 100 are returned as '# 175'.
  *
  * See  https://stackoverflow.com/a/20426113
  *

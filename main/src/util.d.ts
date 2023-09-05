@@ -1,6 +1,6 @@
 /**
  * Turns a number into a stringified version, i.e. 1 becomes 'first', 22 becomes
- * 'twenty-second'. numbers above 100 are returnes as '# 175'.
+ * 'twenty-second'. numbers above 100 are returned as '# 175'.
  *
  * See  https://stackoverflow.com/a/20426113
  *
