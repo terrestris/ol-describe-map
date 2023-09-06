@@ -72,7 +72,7 @@ These examples are all based on the `main`-branch:
 
 * [Basic usage](https://terrestris.github.io/ol-describe-map/main/examples/basic/index.html)
 * [Nominatim describer](https://terrestris.github.io/ol-describe-map/main/examples/nominatim/index.html)
-* [It's OK to `useGeographic()`](https://terrestris.github.io/ol-describe-map/main/examples/nominatim/index.html)
+* [It's OK to `useGeographic()`](https://terrestris.github.io/ol-describe-map/main/examples/use-geographic/index.html)
 
 # API
 
@@ -111,6 +111,7 @@ npm run clean
 
 # TODOs
 
+* Is the description OK or misleading / false when one uses useGeographic?
 * OGC!
 * improve vectorlayer description / statistics etc
 
