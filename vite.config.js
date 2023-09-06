@@ -7,7 +7,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'examples/index.html'),
         basic: resolve(__dirname, 'examples/basic/index.html'),
-        nominatim: resolve(__dirname, 'examples/nominatim/index.html')
+        nominatim: resolve(__dirname, 'examples/nominatim/index.html'),
+        'use-geographic': resolve(__dirname, 'examples/use-geographic/index.html')
       }
     }
   },
