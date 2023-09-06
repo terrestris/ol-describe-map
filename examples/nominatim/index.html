@@ -4,29 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nominatim example</title>
-    <style>
-      body {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 1.3em;
-        line-height: 1.7em;
-      }
-      pre {
-        font-size: 0.9em;
-        line-height: 1.2em;
-      }
-      #map-description {
-        margin-top: 1em;
-      }
-      #map {
-        height: 300px;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../shared.css" />
   </head>
   <body>
+    <div id="header">
+      <h1>Nominatim example</h1>
+      <p>This example uses a <a href="https://nominatim.terrestris.de/">publicly available Nominatim-instance</a> to describe the map. Please interact with the map below and see how the description changes accordingly. The text that is displayed below the map is also set as <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-description"><code>aria-description</code></a> of the map's <code>div</code>-element in order to increase accessibility.</p>
+    </div>
     <div id="map"></div>
     <div id="map-description"></div>
     <button id="speak">Read aloud</button>
     <pre id="raw-description" class="theme-atom-one-dark hljs"></pre>
+    <div id="footer">
+      <p>
+        This is an example of the <a href="https://github.com/terrestris/ol-describe-map"><code>ol-describe-map</code>-library</a>. Here is a <a href="../index.html">list of all other examples</a>.
+      </p>
+    </div>
     <script type="module" src="./map-and-describe.ts"></script>
   </body>
 </html>

@@ -46,6 +46,8 @@ const describeMapAndUpdateInfo = async () => {
   (descElem as HTMLDivElement).innerHTML = description.text;
   (rawElem as HTMLDivElement).innerHTML = highlighted;
 
+  map.getTargetElement().setAttribute('aria-description', description.text);
+
   (speakBtn as HTMLButtonElement).disabled = description.text === '';
 };
 

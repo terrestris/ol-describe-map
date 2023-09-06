@@ -35,6 +35,7 @@ const speakBtn= document.getElementById('speak');
 
 const describeMapAndUpdateInfo = async () => {
   const description = await describeOlMap(map);
+
   const highlighted = hljs.highlight(
     JSON.stringify(description, undefined, '  '),
     {language: 'json'}
@@ -42,6 +43,8 @@ const describeMapAndUpdateInfo = async () => {
 
   (descElem as HTMLDivElement).innerHTML = description.text;
   (rawElem as HTMLDivElement).innerHTML = highlighted;
+
+  map.getTargetElement().setAttribute('aria-description', description.text);
 
   (speakBtn as HTMLButtonElement).disabled = description.text === '';
 };
