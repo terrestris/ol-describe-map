@@ -32,7 +32,19 @@ import WMTS from 'ol/source/WMTS';
 import Zoomify from 'ol/source/Zoomify';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
 
+let globalFetch: any = null;
+
 describe('determineSourceType', () => {
+  beforeEach(() => {
+    globalFetch = global.fetch;
+    global.fetch = async (): Promise<Response> => {
+      return new Response('{}');
+    };
+  });
+  afterEach(() => {
+    global.fetch = globalFetch;
+  });
+
   test('detects BaseImageLayer', () => {
     const source = new BingMaps({key: '', imagerySet: 'Aerial'});
     const detected = determineSourceType(source);
