@@ -3,7 +3,8 @@ import Layer from 'ol/layer/Layer';
 export type ViewDescription = {
     bbox?: number[];
     center?: number[];
-    projection?: string;
+    viewProjection?: string;
+    userProjection?: string;
     rotation?: number;
     scale?: number;
     zoom?: number;

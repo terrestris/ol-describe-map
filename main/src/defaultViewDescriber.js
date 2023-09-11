@@ -86,14 +86,12 @@ var defaultViewDescriber = function (view) { return __awaiter(void 0, void 0, vo
         center = view.getCenter();
         viewProjection = view.getProjection();
         userProjection = (0, proj_1.getUserProjection)();
-        if (userProjection && userProjection.getCode() !== viewProjection.getCode()) {
-            viewProjection = userProjection;
-        }
-        epsg4326 = get4326Coordinates(bbox, center, viewProjection);
+        epsg4326 = get4326Coordinates(bbox, center, userProjection || viewProjection);
         viewDesc = {
             bbox: bbox,
             center: center,
-            projection: viewProjection.getCode(),
+            viewProjection: viewProjection ? viewProjection.getCode() : undefined,
+            userProjection: userProjection ? userProjection.getCode() : undefined,
             rotation: view.getRotation(),
             zoom: view.getZoom(),
             scale: calculateScale(view),
