@@ -34,14 +34,14 @@ describe('describe function', () => {
     let description = await describeOlMap(map);
     expect(description.text).not.toBe('');
     expect(description.view?.bbox).toBeInstanceOf(Array);
-    expect(description.view?.projection).toStrictEqual('EPSG:3857');
+    expect(description.view?.viewProjection).toStrictEqual('EPSG:3857');
+    expect(description.view?.userProjection).toBe(undefined);
     expect(description.layers?.length).not.toBe(0);
   });
   describe('default describers', () => {
     test('default textual description', async () => {
       let description = await describeOlMap(map);
       expect(description.text).toContain('coordinate [0, 0]');
-      expect(description.text).toContain('EPSG:3857');
       expect(description.text).toContain('counter-clockwise');
       expect(description.text).toContain('first');
       expect(description.text).toContain('second');
@@ -52,7 +52,7 @@ describe('describe function', () => {
       let expectedProj = map.getView().getProjection().getCode();
       let description = await describeOlMap(map);
       expect(description.view?.bbox).toStrictEqual(expectedBbox);
-      expect(description.view?.projection).toStrictEqual(expectedProj);
+      expect(description.view?.viewProjection).toStrictEqual(expectedProj);
     });
     test('default layer description', async () => {
       let description = await describeOlMap(map);

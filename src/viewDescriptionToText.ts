@@ -29,13 +29,10 @@ export const viewDescriptionToText = (viewDesc: ViewDescription): string[] => {
   let parts: string[] = [];
 
   const {
-    center = [0, 0],
     rotation = 0,
-    projection = '',
+    viewProjection = '',
     epsg4326 = {}
   } = viewDesc;
-
-  let viewProjIsNotEpsg4326 = viewDesc.projection !== 'EPSG:4326';
 
   if (epsg4326.center) {
     parts.push(
@@ -43,11 +40,8 @@ export const viewDescriptionToText = (viewDesc: ViewDescription): string[] => {
       `longitude coordinate ${formatCoordinate(...epsg4326.center)}. `
     );
   }
-  if (projection) {
-    parts.push(`The map projection that is used in the map has the code ${viewDesc.projection}. `);
-  }
-  if (viewProjIsNotEpsg4326) {
-    parts.push(`Expressed in units of the used map-projection the center is at ${formatCoordinate(...center)}. `);
+  if (viewProjection) {
+    parts.push(`The map projection that is used in the map has the code ${viewProjection}. `);
   }
 
   if (epsg4326.bbox) {
@@ -56,12 +50,6 @@ export const viewDescriptionToText = (viewDesc: ViewDescription): string[] => {
     parts.push(`, the upper right is at ${formatCoordinate(epsg4326.bbox?.[2], epsg4326.bbox?.[3])}. `);
   }
 
-  if (viewProjIsNotEpsg4326 && viewDesc.bbox && projection) {
-    parts.push(
-      `Since the map uses ${projection} as projection, ` +
-      `the extent is actually ${formatBBOX(viewDesc.bbox || [])}. `
-    );
-  }
   parts.push(rotationToText(rotation));
 
   if (viewDesc.scale) {

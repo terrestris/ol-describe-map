@@ -1,7 +1,5 @@
 import { View } from 'ol';
-import {
-  ViewDescriberFunc
-} from './types';
+import { ViewDescriberFunc } from './types';
 import { METERS_PER_UNIT, Projection, get, getUserProjection, transform } from 'ol/proj';
 import { Units } from 'ol/proj/Units';
 
@@ -44,21 +42,18 @@ const get4326Coordinates = (bbox: number[], center: number[], proj: Projection) 
 export const defaultViewDescriber: ViewDescriberFunc = async (view: View) => {
   const bbox = view.calculateExtent() as number[];
   const center = view.getCenter() as number[];
-  let viewProjection = view.getProjection();
+  const viewProjection = view.getProjection();
+  const userProjection = getUserProjection();
 
-  // proj isn't necessarily the projection of the center and bbox coordinates,
+  // viewProjection isn't necessarily the projection of the center and bbox coordinates,
   // because a user might have set a userProjection (e.g. via useGeographic())
   // and in that case the bbox and the center would already be in the userProjection
-  const userProjection = getUserProjection();
-  if (userProjection && userProjection.getCode() !== viewProjection.getCode()) {
-    viewProjection = userProjection;
-  }
-
-  const epsg4326 = get4326Coordinates(bbox, center, viewProjection);
+  const epsg4326 = get4326Coordinates(bbox, center, userProjection || viewProjection);
   let viewDesc = {
     bbox,
     center,
-    projection: viewProjection.getCode(),
+    viewProjection: viewProjection ? viewProjection.getCode() : undefined,
+    userProjection: userProjection ? userProjection.getCode() : undefined,
     rotation: view.getRotation(),
     zoom: view.getZoom(),
     scale: calculateScale(view),
