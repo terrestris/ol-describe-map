@@ -2,6 +2,7 @@ import { View } from 'ol';
 import { ViewDescriberFunc } from './types';
 import { METERS_PER_UNIT, Projection, get, getUserProjection, transform } from 'ol/proj';
 import { Units } from 'ol/proj/Units';
+import { Extent } from 'ol/extent';
 
 const calculateScale = (view: View): number => {
   const unit: Units = view.getProjection().getUnits();
@@ -40,7 +41,7 @@ const get4326Coordinates = (bbox: number[], center: number[], proj: Projection) 
  * @returns ViewDescription A description of the view.
  */
 export const defaultViewDescriber: ViewDescriberFunc = async (view: View) => {
-  const bbox = view.calculateExtent() as number[];
+  const bbox = view.calculateExtent() as Extent;
   const center = view.getCenter() as number[];
   const viewProjection = view.getProjection();
   const userProjection = getUserProjection();

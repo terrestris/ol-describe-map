@@ -48,7 +48,7 @@
   "scripts": {
     "clean": "rimraf ./dist ./coverage",
     "build": "tsc",
-    "build-examples": "vite build --config vite.config.js",
+    "build-examples": "vite build ./examples --config vite.config.js",
     "build-docs": "typedoc --options typedoc.json",
     "build:all": "npm run build-examples && npm run build-docs && npm run build",
     "lint": "eslint -c .eslintrc.js --ext ts src/",
