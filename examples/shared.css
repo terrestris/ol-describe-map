@@ -12,6 +12,7 @@ pre {
   font-size: 0.9em;
   line-height: 1.2em;
   padding: 1em;
+  overflow-x: scroll;
 }
 #map-description {
   margin-top: 1em;

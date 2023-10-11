@@ -10,10 +10,13 @@ const makeLayer = (): Layer => {
   return new Layer({source});
 };
 
-let map;
+let map: Map;
+let div: HTMLDivElement;
 
 describe('describe function', () => {
   beforeEach(() =>  {
+    div = document.createElement('div');
+    document.body.appendChild(div);
     map = new Map({
       layers: [
         makeLayer(),
@@ -23,11 +26,13 @@ describe('describe function', () => {
         center: [0, 0],
         resolution: 1,
         rotation: -Math.PI/4
-      })
+      }),
+      target: div
     });
   });
   afterEach(() => {
-    map = null;
+    map.dispose();
+    div.parentNode?.removeChild(div);
   });
 
   test('basic functionality', async () => {

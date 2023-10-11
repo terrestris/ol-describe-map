@@ -64,7 +64,7 @@ export const determineSourceType = (source: Source): string => {
   } else if (source instanceof CartoDB) { // Check CartoDB first => child of XYZ
     sourceType = 'CartoDB';
   } else if (source instanceof OSM) { // Check OSM first => child of XYZ
-    sourceType = 'OSM';
+    sourceType = 'OpenStreetMap';
   } else if (source instanceof StadiaMaps) { // Check StadiaMaps first => child of XYZ
     sourceType = 'StadiaMaps';
   } else if (source instanceof TileDebug) { // Check TileDebug first => child of XYZ

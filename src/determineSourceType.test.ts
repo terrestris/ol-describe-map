@@ -124,10 +124,10 @@ describe('determineSourceType', () => {
     const detected = determineSourceType(source);
     expect(detected).toMatch(/CartoDB/gi);
   });
-  test('detects OSM', () => {
+  test('detects OpenStreetMap', () => {
     const source = new OSM();
     const detected = determineSourceType(source);
-    expect(detected).toMatch(/OSM/gi);
+    expect(detected).toMatch(/OpenStreetMap/gi);
   });
   test('detects StadiaMaps', () => {
     const source = new StadiaMaps({layer: 'stamen_terrain', apiKey: '', retina: false});
