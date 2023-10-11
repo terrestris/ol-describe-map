@@ -1,9 +1,9 @@
-import { View } from 'ol';
-import { describe as describeOlMap } from '.';
-
 import Map from 'ol/Map';
 import Layer from 'ol/layer/Layer';
 import Source from 'ol/source/Source';
+import View from 'ol/View';
+
+import { describe as describeOlMap } from '.';
 
 const makeLayer = (): Layer => {
   let source = new Source({});
