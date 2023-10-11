@@ -21,7 +21,8 @@
 <li class="tsd-signature tsd-anchor-link" id="describe"><span class="tsd-kind-call-signature">describe</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">map</span>, <span class="tsd-kind-parameter">conf</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">layers</span><span class="tsd-signature-symbol">: </span><a href="../types/types.LayerDescription.html" class="tsd-signature-type tsd-kind-type-alias">LayerDescription</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">text</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">view</span><span class="tsd-signature-symbol">: </span><a href="../types/types.ViewDescription.html" class="tsd-signature-type tsd-kind-type-alias">ViewDescription</a><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">&gt;</span><a href="#describe" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Describes the passed map according to the passed configuration and returns that
-description.</p>
+description. By default also the &#39;aria-description&#39; attribute of the map&#39;s DOM
+element is updated.</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -34,14 +35,15 @@ description.</p>
 <li>
 <h5><span class="tsd-kind-parameter">conf</span>: <a href="../types/types.DescribeConfiguration.html" class="tsd-signature-type tsd-kind-type-alias">DescribeConfiguration</a><span class="tsd-signature-symbol"> = {}</span></h5>
 <div class="tsd-comment tsd-typography"><p>DescribeConfiguration A configuration how you want the
-  map to be described.</p>
+  map to be described and whether the &#39;aria-description&#39; in the DOM
+  should directly be updated.</p>
 </div>
 <div class="tsd-comment tsd-typography"></div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">layers</span><span class="tsd-signature-symbol">: </span><a href="../types/types.LayerDescription.html" class="tsd-signature-type tsd-kind-type-alias">LayerDescription</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">text</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">view</span><span class="tsd-signature-symbol">: </span><a href="../types/types.ViewDescription.html" class="tsd-signature-type tsd-kind-type-alias">ViewDescription</a><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">&gt;</span></h4><p>MapDescription A map description object.</p>
 
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/terrestris/ol-describe-map/blob/6cdc0c2/src/index.ts#L21">index.ts:21</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/terrestris/ol-describe-map/blob/2d5701a/src/index.ts#L23">index.ts:23</a></li></ul></aside></li></ul></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">

@@ -46,39 +46,46 @@ var defaultLayerDescriber_1 = __importDefault(require("./defaultLayerDescriber")
 var defaultTextualDescriber_1 = __importDefault(require("./defaultTextualDescriber"));
 /**
  * Describes the passed map according to the passed configuration and returns that
- * description.
+ * description. By default also the 'aria-description' attribute of the map's DOM
+ * element is updated.
  *
  * @param map Map An OpenLayers Map you want to have a description for.
  * @param conf DescribeConfiguration A configuration how you want the
- *   map to be described.
+ *   map to be described and whether the 'aria-description' in the DOM
+ *   should directly be updated.
  * @returns MapDescription A map description object.
  */
 function describe(map, conf) {
     if (conf === void 0) { conf = {}; }
     return __awaiter(this, void 0, void 0, function () {
-        var _a, layerFilter, _b, viewDescriber, _c, layerDescriber, _d, textualDescriber, layers, viewDescription, layerDescriptions, textualDescription;
+        var _a, layerFilter, _b, viewDescriber, _c, layerDescriber, _d, textualDescriber, _e, updateAriaDescription, view, layers, viewDescription, layerDescriptions, textualDescription, targetElement;
         var _this = this;
-        return __generator(this, function (_e) {
-            switch (_e.label) {
+        return __generator(this, function (_f) {
+            switch (_f.label) {
                 case 0:
-                    _a = conf.layerFilter, layerFilter = _a === void 0 ? defaultLayerFilter_1.default : _a, _b = conf.viewDescriber, viewDescriber = _b === void 0 ? defaultViewDescriber_1.default : _b, _c = conf.layerDescriber, layerDescriber = _c === void 0 ? defaultLayerDescriber_1.default : _c, _d = conf.textualDescriber, textualDescriber = _d === void 0 ? defaultTextualDescriber_1.default : _d;
+                    _a = conf.layerFilter, layerFilter = _a === void 0 ? defaultLayerFilter_1.default : _a, _b = conf.viewDescriber, viewDescriber = _b === void 0 ? defaultViewDescriber_1.default : _b, _c = conf.layerDescriber, layerDescriber = _c === void 0 ? defaultLayerDescriber_1.default : _c, _d = conf.textualDescriber, textualDescriber = _d === void 0 ? defaultTextualDescriber_1.default : _d, _e = conf.updateAriaDescription, updateAriaDescription = _e === void 0 ? true : _e;
+                    view = map.getView();
                     layers = map.getAllLayers().filter(layerFilter);
-                    return [4 /*yield*/, viewDescriber(map.getView())];
+                    return [4 /*yield*/, viewDescriber(view)];
                 case 1:
-                    viewDescription = _e.sent();
+                    viewDescription = _f.sent();
                     return [4 /*yield*/, Promise.all(layers.map(function (layer) { return __awaiter(_this, void 0, void 0, function () {
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
-                                    case 0: return [4 /*yield*/, layerDescriber(layer)];
+                                    case 0: return [4 /*yield*/, layerDescriber(layer, view)];
                                     case 1: return [2 /*return*/, _a.sent()];
                                 }
                             });
                         }); }))];
                 case 2:
-                    layerDescriptions = _e.sent();
+                    layerDescriptions = _f.sent();
                     return [4 /*yield*/, textualDescriber(viewDescription, layerDescriptions)];
                 case 3:
-                    textualDescription = _e.sent();
+                    textualDescription = _f.sent();
+                    targetElement = map.getTargetElement();
+                    if (updateAriaDescription && targetElement) {
+                        targetElement.setAttribute('aria-description', textualDescription);
+                    }
                     return [2 /*return*/, {
                             text: textualDescription,
                             view: viewDescription,

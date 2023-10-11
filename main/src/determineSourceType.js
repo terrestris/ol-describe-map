@@ -79,7 +79,7 @@ var determineSourceType = function (source) {
         sourceType = 'CartoDB';
     }
     else if (source instanceof OSM_1.default) { // Check OSM first => child of XYZ
-        sourceType = 'OSM';
+        sourceType = 'OpenStreetMap';
     }
     else if (source instanceof StadiaMaps_1.default) { // Check StadiaMaps first => child of XYZ
         sourceType = 'StadiaMaps';

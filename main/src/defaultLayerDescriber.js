@@ -39,26 +39,92 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultLayerDescriber = void 0;
 var determineLayerType_1 = require("./determineLayerType");
 var determineSourceType_1 = require("./determineSourceType");
+var util_1 = require("./util");
 /**
  * Returns a basic description of the passed layer.
  *
  * @param layer Layer A layer to describe.
  * @returns LayerDescription A description of the layer.
  */
-var defaultLayerDescriber = function (layer) { return __awaiter(void 0, void 0, void 0, function () {
-    var layerType, source, sourceType, desc;
+var defaultLayerDescriber = function (layer, view) { return __awaiter(void 0, void 0, void 0, function () {
+    var layerType, source, sourceType, details, desc;
     return __generator(this, function (_a) {
         layerType = (0, determineLayerType_1.determineLayerType)(layer);
         source = layer.getSource();
         sourceType = source == null ? 'unknown' : (0, determineSourceType_1.determineSourceType)(source);
+        details = null;
+        if (sourceType === 'Vector') {
+            details = determineVectorLayerDetails(layer, view);
+        }
         desc = {
             type: layerType,
             source: sourceType,
-            details: null
+            details: details
         };
         return [2 /*return*/, desc];
     });
 }); };
 exports.defaultLayerDescriber = defaultLayerDescriber;
+/**
+ * Determines details for the passed vector layer and current Map view.
+ * @param layer
+ * @param view
+ * @returns
+ */
+var determineVectorLayerDetails = function (layer, view) {
+    var details = {};
+    var source = layer.getSource();
+    var extent = view.calculateExtent();
+    var totalFeatures = source.getFeatures();
+    if (totalFeatures.length === 0) {
+        details.numTotalFeaturesInSource = 0;
+        details.numFeaturesInExtent = 0;
+        details.numRenderedFeaturesInExtent = 0;
+        details.numSkippedFeaturesInExtent = 0;
+        return details;
+    }
+    var extentFeatures = source.getFeaturesInExtent(extent);
+    var numTotalFeatures = totalFeatures.length;
+    var numExtentFeatures = extentFeatures.length;
+    var res = view.getResolution();
+    var styleFunc = layer.getStyleFunction();
+    var renderedFeatures = [];
+    var skippedFeatures = [];
+    if (styleFunc !== undefined && res !== undefined) {
+        extentFeatures.forEach(function (feature) {
+            var styles = styleFunc(feature, res);
+            if (styles === undefined) {
+                skippedFeatures.push(feature);
+            }
+            else {
+                renderedFeatures.push(feature);
+            }
+        });
+    }
+    details.numTotalFeaturesInSource = numTotalFeatures;
+    details.numFeaturesInExtent = numExtentFeatures;
+    details.numRenderedFeaturesInExtent = renderedFeatures.length;
+    details.numSkippedFeaturesInExtent = skippedFeatures.length;
+    var keys = undefined;
+    var renderedData = [];
+    var statsKeys = [];
+    renderedFeatures.forEach(function (renderedFeat) {
+        var featureProps = renderedFeat.getProperties();
+        delete featureProps.geometry;
+        if (keys === undefined) {
+            keys = Object.keys(featureProps);
+            for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
+                var key = keys_1[_i];
+                if (typeof featureProps[key] === 'number') {
+                    statsKeys.push(key);
+                }
+            }
+        }
+        renderedData.push(featureProps);
+    });
+    var nameAttribute = (0, util_1.getNameAttribute)(renderedFeatures[0]);
+    details.renderedStatistics = (0, util_1.simpleStats)(renderedData, statsKeys, nameAttribute);
+    return details;
+};
 exports.default = exports.defaultLayerDescriber;
 //# sourceMappingURL=defaultLayerDescriber.js.map
