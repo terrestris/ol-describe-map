@@ -6,25 +6,59 @@ import {
   roundTo
 } from './util';
 
-
+/**
+ * Converts a rotation in radians to a descriptive sentence.
+ *
+ * @param {number} rotation - The rotation angle in radians to describe.
+ * @returns {string} A descriptive sentence based on the rotation angle.
+ */
 const rotationToText = (rotation: number) => {
-  let absDegrees = rad2deg(Math.abs(rotation));
-  let isRotated = 'This map is rotated';
-  let direction = rotation > 0 ? 'clockwise' : 'counter-clockwise';
-  let rightLeft = rotation > 0 ? 'right' : 'left';
+  // Constants for circle and direction angles
+  const CIRCLE_DEGREES = 360;
+  const HALF_CIRCLE_DEGREES = 180;
+  const UP_DEGREES = 0;
+  const RIGHT_DEGREES = 90;
+  const DOWN_DEGREES = 180;
+  const LEFT_DEGREES = 270;
 
-  if (absDegrees % 360 === 0) {
-    return 'This map is not rotated, north is at the top. ';
-  } else if (absDegrees % 180 === 0) {
-    return `${isRotated}: North is at the bottom of the map. `;
-  } else if (absDegrees % 270 === 0 || absDegrees % 90 === 0) {
-    return `${isRotated}; North is at the ${rightLeft}-hand side of the map. `;
+  // reusable text for rotated map
+  const isRotated = 'This map is rotated';
+
+  // Convert to degrees and ensure it is within [0, 360) range
+  let degrees = rad2deg(rotation) % CIRCLE_DEGREES;
+  if (degrees < 0) {
+    degrees = CIRCLE_DEGREES + degrees;
   }
 
-  return `${isRotated} ${direction} by roughly ${roundTo(absDegrees, 2)} degrees. `;
+  // Handle special cases for cardinal directions
+  if (degrees === UP_DEGREES) {
+    return 'This map is not rotated, north is at the top. ';
+  } else if (degrees === RIGHT_DEGREES) {
+    return `${isRotated}, north is at the right-hand side. `;
+  } else if (degrees === DOWN_DEGREES) {
+    return `${isRotated}, north is at the bottom. `;
+  } else if (degrees === LEFT_DEGREES) {
+    return `${isRotated}, north is at the left-hand side. `;
+  }
+
+  // Determine the rotation direction and describe it
+  let direction = 'clockwise';
+  if (degrees > HALF_CIRCLE_DEGREES) {
+    degrees = CIRCLE_DEGREES - degrees;
+    direction = 'counter-clockwise';
+  }
+
+  // Return the description including the direction and rounded degrees
+  return `${isRotated} ${direction} by roughly ${roundTo(degrees, 2)} degrees. `;
 };
 
-
+/**
+ * Converts a description of the view to a bunch of descriptive sentences.
+ *
+ * @param {ViewDescription} viewDesc - an object describing various aspects of the view.
+ * @returns {string[]} A bunch of descriptive sentences based on the passed apects of
+ *   the view.
+ */
 export const viewDescriptionToText = (viewDesc: ViewDescription): string[] => {
   let parts: string[] = [];
 
