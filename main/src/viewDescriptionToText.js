@@ -2,22 +2,56 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.viewDescriptionToText = void 0;
 var util_1 = require("./util");
+/**
+ * Converts a rotation in radians to a descriptive sentence.
+ *
+ * @param {number} rotation - The rotation angle in radians to describe.
+ * @returns {string} A descriptive sentence based on the rotation angle.
+ */
 var rotationToText = function (rotation) {
-    var absDegrees = (0, util_1.rad2deg)(Math.abs(rotation));
+    // Constants for circle and direction angles
+    var CIRCLE_DEGREES = 360;
+    var HALF_CIRCLE_DEGREES = 180;
+    var UP_DEGREES = 0;
+    var RIGHT_DEGREES = 90;
+    var DOWN_DEGREES = 180;
+    var LEFT_DEGREES = 270;
+    // reusable text for rotated map
     var isRotated = 'This map is rotated';
-    var direction = rotation > 0 ? 'clockwise' : 'counter-clockwise';
-    var rightLeft = rotation > 0 ? 'right' : 'left';
-    if (absDegrees % 360 === 0) {
+    // Convert to degrees and ensure it is within [0, 360) range
+    var degrees = (0, util_1.rad2deg)(rotation) % CIRCLE_DEGREES;
+    if (degrees < 0) {
+        degrees = CIRCLE_DEGREES + degrees;
+    }
+    // Handle special cases for cardinal directions
+    if (degrees === UP_DEGREES) {
         return 'This map is not rotated, north is at the top. ';
     }
-    else if (absDegrees % 180 === 0) {
-        return "".concat(isRotated, ": North is at the bottom of the map. ");
+    else if (degrees === RIGHT_DEGREES) {
+        return "".concat(isRotated, ", north is at the right-hand side. ");
     }
-    else if (absDegrees % 270 === 0 || absDegrees % 90 === 0) {
-        return "".concat(isRotated, "; North is at the ").concat(rightLeft, "-hand side of the map. ");
+    else if (degrees === DOWN_DEGREES) {
+        return "".concat(isRotated, ", north is at the bottom. ");
     }
-    return "".concat(isRotated, " ").concat(direction, " by roughly ").concat((0, util_1.roundTo)(absDegrees, 2), " degrees. ");
+    else if (degrees === LEFT_DEGREES) {
+        return "".concat(isRotated, ", north is at the left-hand side. ");
+    }
+    // Determine the rotation direction and describe it
+    var direction = 'clockwise';
+    if (degrees > HALF_CIRCLE_DEGREES) {
+        degrees = CIRCLE_DEGREES - degrees;
+        direction = 'counter-clockwise';
+    }
+    // Return the description including the direction and rounded degrees
+    return "".concat(isRotated, " ").concat(direction, " by roughly ").concat((0, util_1.roundTo)(degrees, 2), " degrees. ");
 };
+/**
+ * Converts a description of the view to a bunch of descriptive sentences.
+ *
+ * @param {ViewDescription} viewDesc - an object describing various aspects of the view.
+ * @returns {string[]} A bunch of descriptive sentences based on the passed apects of
+ *   the view.
+ */
 var viewDescriptionToText = function (viewDesc) {
     var _a, _b, _c, _d;
     var parts = [];
