@@ -73,6 +73,7 @@ These examples are all based on the `main`-branch:
 * [Basic usage](https://terrestris.github.io/ol-describe-map/main/examples/basic/index.html)
 * [Nominatim describer](https://terrestris.github.io/ol-describe-map/main/examples/nominatim/index.html)
 * [It's OK to `useGeographic()`](https://terrestris.github.io/ol-describe-map/main/examples/use-geographic/index.html)
+* [Describing a vector layer)`](https://terrestris.github.io/ol-describe-map/main/examples/vector/index.html)
 
 # API
 
@@ -92,7 +93,7 @@ npm run test:watch
 
 # preview examples
 npm run serve-examples
-# examples are now e.g. http://localhost:5173/basic/index.html
+# examples are now listed under http://localhost:5173/examples/index.html
 
 # build (library only)
 npm run build

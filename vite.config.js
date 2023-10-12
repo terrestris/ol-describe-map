@@ -11,8 +11,7 @@ export default defineConfig({
         'use-geographic': resolve(__dirname, 'examples/use-geographic/index.html'),
         vector: resolve(__dirname, 'examples/vector/index.html')
       }
-    },
-    outDir: '../dist'
+    }
   },
   base: './'
 });
