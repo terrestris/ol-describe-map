@@ -73,7 +73,7 @@ These examples are all based on the `main`-branch:
 * [Basic usage](https://terrestris.github.io/ol-describe-map/main/examples/basic/index.html)
 * [Nominatim describer](https://terrestris.github.io/ol-describe-map/main/examples/nominatim/index.html)
 * [It's OK to `useGeographic()`](https://terrestris.github.io/ol-describe-map/main/examples/use-geographic/index.html)
-* [Describing a vector layer)`](https://terrestris.github.io/ol-describe-map/main/examples/vector/index.html)
+* [Describing a vector layer](https://terrestris.github.io/ol-describe-map/main/examples/vector/index.html)
 
 # API
 
