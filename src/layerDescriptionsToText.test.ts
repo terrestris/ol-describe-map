@@ -16,6 +16,12 @@ let tileLayerBasicDesc: LayerDescription = {
   source: determineSourceType(new Source({}))
 };
 
+let vectorLayerBasicDesc: LayerDescription = {
+  details: null,
+  type: determineLayerType(new VectorLayer()),
+  source: determineSourceType(new VectorSource({}))
+};
+
 let vectorLayerDesc: LayerDescription = {
   details: {
     numFeaturesInExtent: 4,
@@ -36,7 +42,6 @@ let vectorLayerDesc: LayerDescription = {
   type: determineLayerType(new VectorLayer()),
   source: determineSourceType(new VectorSource({}))
 };
-
 
 let vectorLayerDescMoreFeatures: LayerDescription = {
   details: {
@@ -67,6 +72,25 @@ let vectorLayerDescMoreFeatures: LayerDescription = {
   source: determineSourceType(new VectorSource({}))
 };
 
+let vectorLayerFeaturesWithoutNames: LayerDescription = {
+  details: {
+    numFeaturesInExtent: 2,
+    numRenderedFeaturesInExtent: 2,
+    numSkippedFeaturesInExtent: 2,
+    numTotalFeaturesInSource: 2,
+    renderedStatistics: {
+      scribble: {
+        min: 1,
+        max: 1,
+        avg: 1,
+        sum: 1
+      }
+    }
+  },
+  type: determineLayerType(new VectorLayer()),
+  source: determineSourceType(new VectorSource({}))
+};
+
 describe('layerDescriptionsToText', () => {
   test('describes a very basic tile layer', () => {
     let descriptions: LayerDescription[] = [
@@ -78,6 +102,18 @@ describe('layerDescriptionsToText', () => {
     expect(text).toMatch(/1 layer./);
     expect(text).toMatch(/tile-layer/);
     expect(text).toMatch(/unknown-source/);
+  });
+
+  test('describes a very basic vector layer without details', () => {
+    let descriptions: LayerDescription[] = [
+      vectorLayerBasicDesc
+    ];
+    let got: string[] = layerDescriptionsToText(descriptions);
+    expect(got.length).toBeGreaterThanOrEqual(1);
+    let text = got.join('');
+    expect(text).toMatch(/1 layer./);
+    expect(text).toMatch(/vector-layer/);
+    expect(text).toMatch(/Vector-source/);
   });
 
   test('describes details for vector layers', () => {
@@ -116,6 +152,18 @@ describe('layerDescriptionsToText', () => {
     expect(text).toMatch(/minimal value is -10 \(feature named 'min'\)/);
     expect(text).toMatch(/maximum value is 10 \(for the feature with name 'MAX'\)/);
     expect(text).toMatch(/average value is 0 and the sum is 0/);
+  });
+
+  test('describes details for vector layers, even when unnamed', () => {
+    let descriptions: LayerDescription[] = [
+      vectorLayerFeaturesWithoutNames
+    ];
+    let got: string[] = layerDescriptionsToText(descriptions);
+    expect(got.length).toBeGreaterThanOrEqual(1);
+    let text = got.join('');
+    expect(text).toMatch(/1 layer./);
+    expect(text).toMatch(/'scribble'/);
+    expect(text).not.toMatch(/(named|with name)/);
   });
 });
 

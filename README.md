@@ -112,7 +112,5 @@ npm run clean
 
 # TODOs
 
-* Is the description OK or misleading / false when one uses useGeographic?
 * OGC!
-* improve vectorlayer description / statistics etc
 
