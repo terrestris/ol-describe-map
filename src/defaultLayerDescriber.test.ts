@@ -1,16 +1,17 @@
-import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
+import Feature from 'ol/Feature';
 import Map from 'ol/Map';
 import View from 'ol/View';
+import Point from 'ol/geom/Point';
+import Layer from 'ol/layer/Layer';
+import TileLayer from 'ol/layer/Tile';
+import VectorLayer from 'ol/layer/Vector';
+import OSM from 'ol/source/OSM';
+import VectorSource from 'ol/source/Vector';
 
+import { VectorLayerDetails } from './types';
 import {
   defaultLayerDescriber
 } from './defaultLayerDescriber';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import { Feature } from 'ol';
-import { Point } from 'ol/geom';
-import { VectorLayerDetails } from './types';
 
 let div;
 let map;
@@ -54,6 +55,11 @@ describe('defaultLayerDescriber', () => {
   afterEach(() => {
     map.dispose();
     div.parentNode?.removeChild(div);
+  });
+
+  test('describes a layer with unknown source', async () => {
+    let got = await defaultLayerDescriber(new Layer({}), view);
+    expect(got.source).toStrictEqual('unknown');
   });
 
   test('describes a tile layer', async () => {
