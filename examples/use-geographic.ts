@@ -11,7 +11,7 @@ import 'highlight.js/styles/atom-one-dark.css';
 
 hljs.registerLanguage('json', json);
 
-import { describe as describeOlMap } from '../../src/index';
+import { describe as describeOlMap } from '../src/index';
 
 import { useGeographic } from 'ol/proj';
 
