@@ -6,12 +6,12 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'examples/index.html'),
-        basic: resolve(__dirname, 'examples/basic/index.html'),
-        nominatim: resolve(__dirname, 'examples/nominatim/index.html'),
-        'use-geographic': resolve(__dirname, 'examples/use-geographic/index.html'),
-        vector: resolve(__dirname, 'examples/vector/index.html')
+        basic: resolve(__dirname, 'examples/basic.html'),
+        nominatim: resolve(__dirname, 'examples/nominatim.html'),
+        'use-geographic': resolve(__dirname, 'examples/use-geographic.html'),
+        vector: resolve(__dirname, 'examples/vector.html')
       }
     }
   },
-  base: './'
+  base: './',
 });

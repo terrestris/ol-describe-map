@@ -1,36 +1,22 @@
 import 'ol/ol.css';
+import { FeatureLike } from 'ol/Feature';
 import Map from 'ol/Map.js';
 import OSM from 'ol/source/OSM.js';
 import TileLayer from 'ol/layer/Tile.js';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
-import {
-  useGeographic
-} from 'ol/proj';
+import { useGeographic } from 'ol/proj';
+import { StyleFunction } from 'ol/style/Style';
+import { Circle, Fill, RegularShape, Stroke, Style, Text } from 'ol/style';
 import View from 'ol/View.js';
-import {
-  Circle,
-  Fill,
-  RegularShape,
-  Stroke,
-  Style,
-  Text
-} from 'ol/style';
-
 
 import hljs from 'highlight.js/lib/core';
 import json from 'highlight.js/lib/languages/json';
 import 'highlight.js/styles/atom-one-dark.css';
 hljs.registerLanguage('json', json);
 
-import {
-  describe
-} from '../../src/index';
-import { Feature } from 'ol';
-import { Geometry } from 'ol/geom';
-import { StyleFunction, StyleLike } from 'ol/style/Style';
-import { FeatureLike } from 'ol/Feature';
+import { describe } from '../src/index';
 
 const fillTiny = new Fill({
   color: '#843ac5',
@@ -125,7 +111,7 @@ const styleFunction: StyleFunction = (feature: FeatureLike, resolution: number):
 
 const vectorLayer = new VectorLayer({
   source: new VectorSource({
-    url: '/data/germany.geojson',
+    url: './germany.geojson',
     format: new GeoJSON(),
     attributions: '<a href="https://github.com/pensnarik/german-cities">Cities of Germany</a>'
   }),

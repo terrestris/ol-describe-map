@@ -11,8 +11,8 @@ import 'highlight.js/styles/atom-one-dark.css';
 
 hljs.registerLanguage('json', json);
 
-import { describe as describeOlMap } from '../../src/index';
-import { nominatimTextualDescriber } from '../../src/nominatimTextualDescriber';
+import { describe as describeOlMap } from '../src/index';
+import { nominatimTextualDescriber } from '../src/nominatimTextualDescriber';
 import { transform } from 'ol/proj';
 
 const map = new Map({
