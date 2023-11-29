@@ -18,6 +18,9 @@ The library ships with the most basic functionality to describe maps, which most
 applications will most likely adjust to their specific purpose. It is easy to configure
 more specific describers that take care of the specialties of your actual application.
 
+By default a gathered map description is added to the `aria-description`-attribute of
+the `div`-element of the map.
+
 # Usage
 
 Install as dependency:
@@ -39,10 +42,12 @@ const map = new Map({ /* configuration left-out for brevity */ });
 map.on('moveend', async () => {
   let desc = await describe(map);
   console.log(desc.text);
-  // instead of logging, you probably want to update a
-  // aria-description attribute of the map-div:
-  map.getTargetElement().setAttribute('aria-description', desc.text);
+  // …by default the aria-description attribute of the map-div is automatically
+  // updated with the description. This can be configured, of course.
 });
+
+// call the describe-function with a configuration object to adjust for your specific
+// needs, see the examples below.
 ```
 
 The library ships with some textual describers, and they can be quite useful as they are.
@@ -93,7 +98,7 @@ npm run test:watch
 
 # preview examples
 npm run serve-examples
-# examples are now listed under http://localhost:5173/examples/index.html
+# examples are now listed under http://localhost:5173/
 
 # build (library only)
 npm run build
