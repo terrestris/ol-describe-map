@@ -1,6 +1,6 @@
 {
   "name": "@terrestris/ol-describe-map",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Get a configurable textual description of an OpenLayers map, to e.g. enhance accessibility",
   "keywords": [
     "openlayers",
