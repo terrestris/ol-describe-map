@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic WMS layer example</title>
+    <link rel="stylesheet" type="text/css" href="./shared.css" />
+  </head>
+  <body>
+    <div id="header">
+      <h1>Basic WMS layer example</h1>
+      <p>This example focusses on a basic description of WMS layers. See also
+        <a href="../wms-verbose.html">the verbose WMS example</a>, for a more detailed approach,
+        please.</p>
+      <p>Please interact with the map below and see how the description changes accordingly. The text that is displayed below the map is also set as <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-description"><code>aria-description</code></a> of the map's <code>div</code>-element in order to increase accessibility.</p>
+    </div>
+    <div id="map"></div>
+    <div id="map-description"></div>
+    <button id="speak">Read aloud</button>
+    <pre id="raw-description" class="theme-atom-one-dark hljs"></pre>
+    <div id="footer">
+      <p>
+        This is an example of the <a href="https://github.com/terrestris/ol-describe-map"><code>ol-describe-map</code>-library</a>. Here is a <a href="./">list of all other examples</a>.
+      </p>
+    </div>
+    <script type="module" src="./wms.ts"></script>
+  </body>
+</html>

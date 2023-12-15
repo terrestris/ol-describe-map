@@ -1,0 +1,71 @@
+.wms-desc {
+  line-height: 1.3em;
+}
+.wms-desc table {
+  border-collapse: collapse;
+  margin: 1.2em 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 100vH;
+  box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.7)
+}
+.wms-desc thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+}
+.wms-desc th,
+.wms-desc td,
+.wms-desc caption {
+  padding: 0.4em 0.6em;
+}
+.wms-desc td a {
+  color: #040273
+}
+.wms-desc tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+.wms-desc tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+.wms-desc tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+.wms-desc tbody tr:hover {
+  background-color: #dddddd
+}
+.wms-desc caption {
+  font-weight: bold;
+  text-align: left;
+  background: #dddddd;
+  box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.7)
+}
+.wms-desc dl {
+  display: flex;
+  flex-flow: row wrap;
+  border: solid #dddddd;
+  border-width: 1px 1px 0 0;
+  box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.7)
+}
+.wms-desc dt {
+  flex-basis: 20%;
+  padding: 2px 4px;
+  background: #009879;
+  text-align: right;
+  color: #fff;
+  font-weight: bold;
+}
+.wms-desc dd {
+  flex-basis: 70%;
+  flex-grow: 1;
+  margin: 0;
+  padding: 2px 4px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.wms-desc dd:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+.wms-desc dd:hover {
+  background-color: #dddddd
+}

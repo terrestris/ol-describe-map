@@ -131,7 +131,7 @@ const map = new Map({
   view: new View({
     center: [8.8, 51.3],
     zoom: 5
-  }),
+  })
 });
 
 const descElem = document.getElementById('map-description');
