@@ -1,4 +1,5 @@
 import Feature from 'ol/Feature';
+import { ViewDescriberFunc, LayerDescriberFunc } from './types';
 
 const SPECIAL_NUMS = ['zeroth', 'first', 'second',
   'third', 'fourth', 'fifth', 'sixth', 'seventh',
@@ -197,4 +198,34 @@ export const makePercentInfo = (share: number|undefined = undefined, total: numb
     return '';
   }
   return ` (${roundTo(100 * (share / total), 2)}%)`;
+};
+
+const wmsResponseCache: { [key: string]: string } = {};
+export const getWmsResponse = async (url: string, params: object): Promise<string> => {
+  let responseTxt = '';
+  let cacheKey = `_url:${encodeURIComponent(url)}`;
+  for (let [k, v] of Object.entries(params)) {
+    cacheKey = `${cacheKey}_${encodeURIComponent(k)}:${encodeURIComponent(v)}`;
+  }
+  if (!wmsResponseCache[cacheKey]) {
+    let wmsUrl = new URL(url);
+    for (let [k, v] of Object.entries(params)) {
+      wmsUrl.searchParams.set(k, v);
+    }
+    responseTxt = await fetch(wmsUrl.toString()).then(resp => resp.text());
+    wmsResponseCache[cacheKey] = responseTxt;
+  }
+  return wmsResponseCache[cacheKey];
+};
+
+export const voidViewDescriber: ViewDescriberFunc = async () => {
+  return {};
+};
+
+export const voidLayersDescriber: LayerDescriberFunc = async () => {
+  return {
+    type: '',
+    source: '',
+    details: null
+  };
 };

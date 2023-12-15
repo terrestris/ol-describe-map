@@ -1,4 +1,8 @@
-import { LayerDescription } from './types';
+import {
+  LayerDescription,
+  VectorLayerDetails,
+  WMSLayerDetails
+} from './types';
 import {
   localNum,
   makePercentInfo,
@@ -29,12 +33,65 @@ export const layerDescriptionsToText = (layerDescs: LayerDescription[]): string[
     if (layerDesc.source === 'Vector') {
       parts = vectorLayersDetailsToText(layerDesc, parts);
     }
+    // add WMS details to textual description
+    if (layerDesc.source === 'TileWMS' || layerDesc.source === 'ImageWMS') {
+      parts = wmsLayersDetailsToText(layerDesc, parts);
+    }
     if (idx === 0 && layerDescs.length > 1) {
       parts.push('This layer is the lowest in the drawing order, other layers are drawn atop of it. ');
     }
     if (idx === layerDescs.length - 1 && layerDescs.length !== 1) {
       parts.push('This layer is top-most in the drawing order.');
     }
+  });
+  return parts;
+};
+
+const wmsLayersDetailsToText = (layerDesc: LayerDescription, parts: string[]) => {
+  if (layerDesc.details == null) {
+    return parts;
+  }
+  const {
+    wmsLayerNames = [],
+    wmsLayerAbstracts = [],
+    wmsLayerTitles = []
+  } = layerDesc.details as WMSLayerDetails;
+
+  const numLayers = wmsLayerNames.length;
+
+  if (numLayers > 1) {
+    parts.push(`This layer is a composition of ${numLayers} layers, those are: `);
+  } else {
+    parts.push('This layer is named ');
+  }
+  wmsLayerNames.forEach((layerName, idx) => {
+    let layerTitle = wmsLayerTitles[idx];
+    let layerAbstract = wmsLayerAbstracts[idx];
+
+    let nameEqualsTitle = layerName === layerTitle;
+    let nameEqualsAbstract = layerName === layerAbstract;
+    let titleEqualsAbstract = layerTitle === layerAbstract;
+
+    let details = [];
+
+    if (nameEqualsTitle && nameEqualsAbstract) {
+      // no details needed
+    } else if (titleEqualsAbstract) {
+      details.push(`title/abstract: "${layerTitle}"`);
+    } else {
+      if (layerTitle) {
+        details.push(`title: "${layerTitle}"`);
+      }
+      if (wmsLayerAbstracts[idx]) {
+        details.push(`abstract: "${layerAbstract}"`);
+      }
+    }
+
+    parts.push(`"${layerName}"`);
+    if (details.length > 0) {
+      parts.push(` (${details.join(', ')})`);
+    }
+    parts.push(idx < numLayers - 1 ? ', ' : '. ');
   });
   return parts;
 };
@@ -48,7 +105,7 @@ const vectorLayersDetailsToText = (layerDesc: LayerDescription, parts: string[])
     numFeaturesInExtent: inExtent = 0,
     numRenderedFeaturesInExtent: rendered = 0,
     renderedStatistics: renderStats = undefined
-  } = layerDesc.details;
+  } = layerDesc.details as VectorLayerDetails;
   const pluralSTotal = total === 1 ? '' : 's';
   const wereWas = rendered === 1 ? 'was' : 'were';
   const renderedPlurals = rendered === 1 ? '' : 's';

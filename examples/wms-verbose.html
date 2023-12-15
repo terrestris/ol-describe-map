@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A more detailed and verbose WMS example</title>
+    <link rel="stylesheet" type="text/css" href="./shared.css" />
+    <link rel="stylesheet" type="text/css" href="./wms-verbose.css" />
+  </head>
+  <body>
+    <div id="header">
+      <h1>A more detailed and verbose WMS example</h1>
+      <p>This example focusses on a more verbose description of WMS layers. See also
+        <a href="../wms.html">the basic WMS example</a>, please.</p>
+      <p>
+        The example shows how to use a combination of your own <code>textualDescriber</code> which generates actual HTML from the details gathered for each layer together with manually setting an approriate
+        ARIA property <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby"><code>aria-describedby</code></a> instead of default <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-description"><code>aria-description</code></a>.
+      </p>
+      <p>Since the focus of this example is on the layers, zooming and panning of the map does not change the description.</p>
+    </div>
+    <div id="map"></div>
+    <div id="map-description"></div>
+    <button id="speak">Read aloud</button>
+    <pre id="raw-description" class="theme-atom-one-dark hljs"></pre>
+    <div id="footer">
+      <p>
+        This is an example of the <a href="https://github.com/terrestris/ol-describe-map"><code>ol-describe-map</code>-library</a>. Here is a <a href="./">list of all other examples</a>.
+      </p>
+    </div>
+    <script type="module" src="./wms-verbose.ts"></script>
+  </body>
+</html>

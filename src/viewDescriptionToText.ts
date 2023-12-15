@@ -84,7 +84,9 @@ export const viewDescriptionToText = (viewDesc: ViewDescription): string[] => {
     parts.push(`, the upper right is at ${formatCoordinate(epsg4326.bbox?.[2], epsg4326.bbox?.[3])}. `);
   }
 
-  parts.push(rotationToText(rotation));
+  if (viewDesc.rotation !== undefined) {
+    parts.push(rotationToText(rotation));
+  }
 
   if (viewDesc.scale) {
     parts.push(`The map has a scale of roughly 1:${roundTo(viewDesc.scale, 0).toLocaleString('en-GB')}. `);

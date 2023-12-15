@@ -1,13 +1,16 @@
 import Map from 'ol/Map';
 
 import {
-  DescribeConfiguration
+  DescribeConfiguration,
+  LayerDescriberFunc,
+  ViewDescriberFunc
 } from './types';
 
 import defaultLayerFilter from './defaultLayerFilter';
 import defaultViewDescriber from './defaultViewDescriber';
 import defaultLayerDescriber from './defaultLayerDescriber';
 import defaultTextualDescriber from './defaultTextualDescriber';
+import { voidLayersDescriber, voidViewDescriber } from './util';
 
 /**
  * Describes the passed map according to the passed configuration and returns that
@@ -21,6 +24,9 @@ import defaultTextualDescriber from './defaultTextualDescriber';
  * @returns MapDescription A map description object.
  */
 export async function describe(map: Map, conf: DescribeConfiguration = {}) {
+  let finalViewDescriber: ViewDescriberFunc;
+  let finalLayerDescriber: LayerDescriberFunc;
+
   const {
     layerFilter = defaultLayerFilter,
     viewDescriber = defaultViewDescriber,
@@ -29,11 +35,22 @@ export async function describe(map: Map, conf: DescribeConfiguration = {}) {
     updateAriaDescription = true
   } = conf;
 
+  if (viewDescriber == null) {
+    finalViewDescriber = voidViewDescriber;
+  } else {
+    finalViewDescriber = viewDescriber;
+  }
+  if (layerDescriber == null) {
+    finalLayerDescriber = voidLayersDescriber;
+  } else {
+    finalLayerDescriber = layerDescriber;
+  }
+
   const view = map.getView();
   let layers = map.getAllLayers().filter(layerFilter);
-  let viewDescription = await viewDescriber(view);
+  let viewDescription = await finalViewDescriber(view);
   let layerDescriptions = await Promise.all(layers.map(async (layer) => {
-    return await layerDescriber(layer, view);
+    return await finalLayerDescriber(layer, view);
   }));
   let textualDescription = await textualDescriber(viewDescription, layerDescriptions);
 
